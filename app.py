@@ -157,7 +157,7 @@ class MyFrame(Frame):
                 self.logBox.insert(self.logLine, f"Created 'Formatted_video' folder")
 
                 if platform.system() != 'Darwin':
-                    ffmpeg = '.\\ffmpeg_win'
+                    ffmpeg = 'ffmpeg.exe'
                 else:
                     ffmpeg = './ffmpeg_mac'
                     
@@ -173,7 +173,7 @@ class MyFrame(Frame):
                 
                 for filename in filenames:
                     new_filename = os.path.join(folder_path, 'Formatted_video',f'{room_no}_{os.path.basename(filename)[10:25]}.mp4')
-                    subprocess.check_output(f"{ffmpeg} -framerate {fr} -i {filename} -c copy {new_filename}", shell=True)
+                    subprocess.check_output(f"{ffmpeg} -framerate {fr} -i {filename} -c copy {new_filename}".replace('/','\\'), shell=True)
                     
                     count += 1
                     self.logLine -= 1
